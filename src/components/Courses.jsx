@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
 import Navbar from './Navbar';
 import { API_ENDPOINTS } from '../config/api';
 
@@ -6,6 +7,7 @@ const Courses = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // Add this hook
 
     useEffect(() => {
         availCourses();
@@ -72,7 +74,7 @@ const Courses = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-3xl font-extrabold text-slate-800">Available Courses</h1>
                     <button
-                        onClick={() => window.location.href = '/add-course'}
+                        onClick={() => navigate('/add-course')} // Fixed this line
                         className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition"
                     >
                         + Add New Course
@@ -100,7 +102,7 @@ const Courses = () => {
                                     <td className="px-6 py-3">
                                         <div className="flex gap-2">
                                             <button
-                                                onClick={() => window.location.href = `/update-course/${course.courseId}`}
+                                                onClick={() => navigate(`/update-course/${course.courseId}`)} // Fixed this line too
                                                 className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition"
                                             >
                                                 Update
